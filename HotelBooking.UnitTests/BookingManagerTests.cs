@@ -155,19 +155,44 @@ namespace HotelBooking.UnitTests
             return data;
         }
 
-        [Fact]
-        public void CreateBooking_RoomIsAvailable_ReturnsTrue()
+        [Theory]
+        [MemberData(nameof(Get_CreateBooking_RoomIsAvailable_ReturnsTrue_Data))]
+        public void CreateBooking_RoomIsAvailable_ReturnsTrue(Booking booking)
         {
             //Arrange
-            Booking booking = GetBooking();
+            var mockBookings = new List<Booking>
+            {
+                new Booking()
+                {
+                    Id = 1,
+                    StartDate = DateTime.Today.AddDays(5),
+                    EndDate = DateTime.Today.AddDays(6),
+                    IsActive = true,
+                    CustomerId = 1,
+                    RoomId = 1
+                }
+            };
+            var mockRooms = new List<Room>
+            {
+                new Room()
+                {
+                    Id = 1,
+                    Description = "A cozy and nice room for the price"
+                },
+                new Room()
+                {
+                    Id = 2,
+                    Description = "A less cozy room. Might have bed bugs."
+                },
+            };
             
             mockBookingRepository
                 .Setup(m => m.GetAll())
-                .Returns(GetBookingData());
+                .Returns(mockBookings);
 
             mockRoomRepository
                 .Setup(m => m.GetAll())
-                .Returns(GetRoomData());
+                .Returns(mockRooms);
             
             //Act
             var res = bookingManager.CreateBooking(booking);
@@ -176,23 +201,109 @@ namespace HotelBooking.UnitTests
             Assert.True(res);
         }
         
-        [Fact]
-        public void CreateBooking_RoomIsNotAvailable_ReturnsFalse()
+        public static IEnumerable<object[]> Get_CreateBooking_RoomIsAvailable_ReturnsTrue_Data()
         {
+            var data = new List<object[]>
+            {
+                new object[] { new Booking()
+                {
+                    Id = 2,
+                    StartDate = DateTime.Today.AddDays(3),
+                    EndDate = DateTime.Today.AddDays(4),
+                    IsActive = true,
+                    CustomerId = 2,
+                }},
+                new object[] { new Booking()
+                {
+                    Id = 2,
+                    StartDate = DateTime.Today.AddDays(7),
+                    EndDate = DateTime.Today.AddDays(8),
+                    IsActive = true,
+                    CustomerId = 2,
+                }},
+                new object[] { new Booking()
+                {
+                    Id = 2,
+                    StartDate = DateTime.Today.AddDays(5),
+                    EndDate = DateTime.Today.AddDays(6),
+                    IsActive = true,
+                    CustomerId = 2,
+                }},
+            };
+            return data;
+        }
+        
+        [Theory]
+        [MemberData(nameof(Get_CreateBooking_RoomIsNotAvailable_ReturnsFalse_Data))]
+        public void CreateBooking_RoomIsNotAvailable_ReturnsFalse(Booking booking)
+        {
+            var mockBookings = new List<Booking>
+            {
+                new Booking()
+                {
+                    Id = 1,
+                    StartDate = DateTime.Today.AddDays(5),
+                    EndDate = DateTime.Today.AddDays(6),
+                    IsActive = true,
+                    CustomerId = 1,
+                }
+            };
+            var mockRooms = new List<Room>
+            {
+                new Room()
+                {
+                    Id = 1,
+                    Description = "A cozy and nice room for the price"
+                },
+            };
             //Arrange
             mockBookingRepository
                 .Setup(m => m.GetAll())
-                .Returns(GetBookingData());
+                .Returns(mockBookings);
 
             mockRoomRepository
                 .Setup(m => m.GetAll())
-                .Returns(GetRoomData());
+                .Returns(mockRooms);
             
             //Act
-            var res = bookingManager.CreateBooking(GetBookingData().First());
+            var res = bookingManager.CreateBooking(booking);
             
             //Assert
             Assert.False(res);
+        }
+        public static IEnumerable<object[]> Get_CreateBooking_RoomIsNotAvailable_ReturnsFalse_Data()
+        {
+            var data = new List<object[]>
+            {
+                new object[] { new Booking()
+                {
+                    Id = 2,
+                    StartDate = DateTime.Today.AddDays(4),
+                    EndDate = DateTime.Today.AddDays(5),
+                    IsActive = true,
+                    CustomerId = 2,
+                    RoomId = 1
+                }},
+                new object[] { new Booking()
+                {
+                    Id = 2,
+                    StartDate = DateTime.Today.AddDays(5),
+                    EndDate = DateTime.Today.AddDays(6),
+                    IsActive = true,
+                    CustomerId = 2,
+                    RoomId = 1
+                }},
+                new object[] { new Booking()
+                {
+                    Id = 2,
+                    StartDate = DateTime.Today.AddDays(6),
+                    EndDate = DateTime.Today.AddDays(7),
+                    IsActive = true,
+                    CustomerId = 2,
+                    RoomId = 1
+                }},
+            };
+            return data;
         }
 
         [Fact]
