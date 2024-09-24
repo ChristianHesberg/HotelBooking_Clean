@@ -241,6 +241,7 @@ namespace HotelBooking.UnitTests
             {
                 new Booking()
                 {
+                    RoomId = 1,
                     Id = 1,
                     StartDate = DateTime.Today.AddDays(5),
                     EndDate = DateTime.Today.AddDays(6),
