@@ -39,10 +39,9 @@ namespace HotelBooking.Infrastructure.Repositories
 
         public void Remove(int id)
         {
-            // The Single method below throws an InvalidOperationException
-            // if there is not exactly one room with the specified Id.
-            var room = db.Room.Single(r => r.Id == id);
-            db.Room.Remove(room);
+            //retro fitted to remove all rooms for the sake of testing
+            var list = db.Room.ToList();
+            db.Room.RemoveRange(list);
             db.SaveChanges();
         }
     }

@@ -17,8 +17,7 @@ namespace HotelBooking.UnitTests
         private Mock<IRepository<Room>> mockRoomRepository;
 
         public BookingManagerTests(){
-            DateTime start = DateTime.Today.AddDays(10);
-            DateTime end = DateTime.Today.AddDays(20);
+            
             mockBookingRepository = new Mock<IRepository<Booking>>();
             mockRoomRepository = new Mock<IRepository<Room>>();
             bookingManager = new BookingManager(mockBookingRepository.Object, mockRoomRepository.Object);
@@ -378,6 +377,7 @@ namespace HotelBooking.UnitTests
         [MemberData(nameof(Get_GetFullyOccupiedDates_NoFullyBookedRooms_ReturnEmptyList_Data))]
         public void GetFullyOccupiedDates_NoFullyBookedRooms_ReturnEmptyList(DateTime start, DateTime end)
         {
+            //Arrange
             var bookings = new List<Booking>
             {
                 new Booking()
@@ -414,7 +414,6 @@ namespace HotelBooking.UnitTests
                 },
             };
             
-            //Arrange
             mockBookingRepository
                 .Setup(m => m.GetAll())
                 .Returns(bookings);
