@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "2e2b61e9-e27f-477b-860b-f842350fbcb0",
-		"name": "HotelBooking_https",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"name": "HotelBooking_http",
+		"schema": "http://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2647456"
 	},
 	"item": [
@@ -35,8 +35,8 @@
 					"raw": "{\n    \"description\": \"Room 1\"\n}"
 				},
 				"url": {
-					"raw": "https://localhost:5000/rooms",
-					"protocol": "https",
+					"raw": "http://localhost:5000/rooms",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -77,8 +77,8 @@
 					"raw": "{\n    \"description\": \"Room 2\"\n}"
 				},
 				"url": {
-					"raw": "https://localhost:5000/rooms",
-					"protocol": "https",
+					"raw": "http://localhost:5000/rooms",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -121,8 +121,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5000/rooms",
-					"protocol": "https",
+					"raw": "http://localhost:5000/rooms",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -154,8 +154,8 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5000/rooms/0",
-					"protocol": "https",
+					"raw": "http://localhost:5000/rooms/0",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -205,8 +205,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5000/rooms/2",
-					"protocol": "https",
+					"raw": "http://localhost:5000/rooms/2",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -257,8 +257,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/Bookings",
-					"protocol": "https",
+					"raw": "http://localhost:5000/Bookings",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
