@@ -9,6 +9,7 @@ Scenario: Create valid booking
 	When I create a booking with these dates
 	Then the booking should be created successfully
 	
+	
 Scenario: User inputs invalid start date 
 	Given the start date is yesterday
 	And the end date is tomorrow
