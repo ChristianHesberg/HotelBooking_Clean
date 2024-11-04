@@ -3,7 +3,7 @@ using Reqnroll;
 namespace HotelBooking.Specs.StepDefinitions;
 
 [Binding]
-public sealed class CalculatorStepDefinitions
+public sealed class BookingManagerStepDefinitions
 {
     // For additional details on Reqnroll step definitions see https://go.reqnroll.net/doc-stepdef
 
