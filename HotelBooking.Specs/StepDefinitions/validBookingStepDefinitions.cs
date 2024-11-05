@@ -30,16 +30,15 @@ public class validBookingStepDefinitions
         bookingManager = new BookingManager(bookingRepository.Object, roomRepository.Object);
     }
 
-    [Given(@"the start date is today")]
-    public void GivenTheStartDateIsToday()
+    [Given(@"the start (.*)")]
+    public void GivenTheStartDateIsToday(string date)
     {
-        _startDate = DateTime.Now;
-    }
+        _startDate = DateTime.Parse(date); }
 
-    [Given(@"the end date is tomorrow")]
+    [Given(@"the end date is one day after")]
     public void GivenTheEndDateIsTomorrow()
     {
-        _endDate = DateTime.Now.AddDays(1);
+        _endDate = _startDate.AddDays(1);
     }
 
     [When(@"I create a booking with these dates")]

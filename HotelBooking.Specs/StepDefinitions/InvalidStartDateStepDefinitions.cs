@@ -23,21 +23,21 @@ public class InvalidStartDateStepDefinitions
         bookingManager = new BookingManager(bookingRepository.Object, roomRepository.Object);
     }
 
-    [Given(@"the start date is yesterday")]
-    public void GivenStartDateIsYesterday()
+    [Given(@"an invalid start (.*)")]
+    public void GivenStartDateIsYesterday(string date)
     {
-        _startDate = DateTime.Now.AddDays(-1);
+        _startDate = DateTime.Parse(date);
     }
 
-    [Given(@"the end date is valid tomorrow")]
+    [Given(@"the end date is after the start date")]
     public void GivenTheEndDateIsTomorrow()
     {
-        _endDate = DateTime.Now.AddDays(1);
+        _endDate = _startDate.AddDays(1);
     }
 
     private Action act;
 
-    [When(@"I create a booking with these wrong dates")]
+    [When(@"I create a booking with these invalid dates")]
     public void WhenICreateABookingWithTheseDates()
     {
         _booking = new Booking()
@@ -51,7 +51,6 @@ public class InvalidStartDateStepDefinitions
     [Then(@"the booking should reject and inform user to fix dates")]
     public void ThenTheBookingShouldBeCreatedSuccessfully()
     {
-        //this should work, but does not. 
         Assert.Throws<ArgumentException>(() => bookingManager.CreateBooking(_booking));
     }
 }
